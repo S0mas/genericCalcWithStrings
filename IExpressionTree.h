@@ -7,8 +7,18 @@
 class IExpressionTree
 {
 public:
-    IExpressionTree() {}
-    ~IExpressionTree() {}
+    IExpressionTree()
+    {
+        expTree = nullptr;
+    }
+    ~IExpressionTree()
+    {
+        if(expTree)
+        {
+            delete expTree;
+            expTree = nullptr;
+        }
+    }
     void run();//infinite loop
 private:
     std::string getCommand() const;

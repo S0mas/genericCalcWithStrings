@@ -9,6 +9,33 @@ std::string minus(std::string a, std::string b)
     return a;
 }
 
+std::string multiplies2(std::string a, std::string b)
+{
+    int i = 0;
+    int j = 0;
+    std::string result("");
+    std::string temp("");
+    for(i = 0; i < a.size(); ++i)
+    {
+        for(j = 0; j < b.size() && i+j < a.size(); ++j)
+        {
+            if(a[i+j] == b[j])
+                temp += a;
+            else
+            {
+                if(result.size()<temp.size())
+                    result = temp;
+                temp = "";
+                break;
+            }
+            if(result.size()<temp.size())
+                result = temp;
+            temp = "";
+        }
+    }
+    return result;
+}
+
 std::string multiplies(std::string a, std::string b)
 {
     const char* X = a.c_str();

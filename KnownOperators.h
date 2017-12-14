@@ -9,6 +9,7 @@
 
 std::string minus(std::string a, std::string b);
 std::string multiplies(std::string a, std::string b);
+std::string multiplies2(std::string a, std::string b);
 std::string divides(std::string a, std::string b);
 template<class T>
 class KnownOperators
@@ -31,12 +32,11 @@ public:
         return operatorsFunctionMap.find(op)->second;
     }
 
-    static KnownOperators<T>* getKnownOperators()
+    static KnownOperators<T>* getInstance()
     {
 
-        if(!singleton)
-            KnownOperators<T>::singleton = new KnownOperators<T>();
-        return singleton;
+        static KnownOperators<T> instance;
+        return &instance;
     }
 private:
     KnownOperators()

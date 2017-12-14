@@ -7,6 +7,7 @@
 class AbstractExpressionTree
 {
 public:
+    virtual ~AbstractExpressionTree(){}
     virtual void createExpTree(const std::vector<std::string>& strVec) = 0;
     virtual std::string getResult() const = 0;
     virtual std::string toString() const = 0;
@@ -22,7 +23,7 @@ public:
     {
         createExpTree(other.toStringVec());
     }
-    ~ExpressionTree()
+    virtual ~ExpressionTree()
     {
         clearTree();
     }
@@ -36,8 +37,7 @@ public:
 
     std::string getResult() const
     {
-        T v;
-        return internalGetResult(v);
+       return root->getValue();
     }
 
     std::string toString() const
@@ -57,21 +57,6 @@ public:
         return strVec;
     }
 private:
-    std::string internalGetResult(const int& v) const
-    {
-        return std::to_string(root->getValue());
-    }
-
-    std::string internalGetResult(const double& v) const
-    {
-        return std::to_string(root->getValue());
-    }
-
-    std::string internalGetResult(const std::string& v) const
-    {
-        return root->getValue();
-    }
-
     void toStringVecRec(const AbstractExpressionNode<T>* root, std::vector<std::string>& strVec) const
     {
         if(root)

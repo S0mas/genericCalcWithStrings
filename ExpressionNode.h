@@ -58,21 +58,21 @@ public:
     virtual std::string getValue() const override
     {
         T v;
-        return internalGetValue(v);
+        return specializationGetValue(v);
     }
     virtual std::string toString() const override       { return type; }
 private:
-    std::string internalGetValue(const int& v) const
+    std::string specializationGetValue(const int& v) const
     {
-        return KnownOperators<T>::getKnownOperators()->getFunction(type)(stoi(AbstractExpressionNode<T>::childs[0]->getValue()), stoi(AbstractExpressionNode<T>::childs[1]->getValue()));
+        return std::to_string(KnownOperators<T>::getInstance()->getFunction(type)(stoi(AbstractExpressionNode<T>::childs[0]->getValue()), stoi(AbstractExpressionNode<T>::childs[1]->getValue())));
     }
-    std::string internalGetValue(const double& v) const
+    std::string specializationGetValue(const double& v) const
     {
-        return KnownOperators<T>::getKnownOperators()->getFunction(type)(stod(AbstractExpressionNode<T>::childs[0]->getValue()), stod(AbstractExpressionNode<T>::childs[1]->getValue()));
+        return std::to_string(KnownOperators<T>::getInstance()->getFunction(type)(stod(AbstractExpressionNode<T>::childs[0]->getValue()), stod(AbstractExpressionNode<T>::childs[1]->getValue())));
     }
-    std::string internalGetValue(const std::string& v) const
+    std::string specializationGetValue(const std::string& v) const
     {
-        return KnownOperators<T>::getKnownOperators()->getFunction(type)(AbstractExpressionNode<T>::childs[0]->getValue(), AbstractExpressionNode<T>::childs[1]->getValue());
+        return KnownOperators<T>::getInstance()->getFunction(type)(AbstractExpressionNode<T>::childs[0]->getValue(), AbstractExpressionNode<T>::childs[1]->getValue());
     }
     const std::string type;
 };
